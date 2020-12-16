@@ -1,15 +1,16 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('poeTree', 'postgres', 'password', {
+const database = new Sequelize('poetree', 'postgres', 'password', {
     host: 'localhost',
     dialect: 'postgres'
 });
 
-sequelize.authenticate().then(
+database.authenticate()
+.then(
     function() {
-        console.log('Connected to poeTree postgres database');
+        console.log('Connected to poetree postgres database');
     },
     function(err){
         console.log(err);
     }
 );
-module.exports = sequelize;
+module.exports = database;
