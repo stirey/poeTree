@@ -1,15 +1,15 @@
 module.exports = function (sequelize, DataTypes) {
 
-    const Feedback = sequelize.define('feedback', {
+    const Announcement = sequelize.define('announcement', {
 
        teacherName: {
            type: DataTypes.STRING,
            allowNull: false
        },
-       comment: {
+       homework: {
            type: DataTypes.STRING,
            allowNull: false
        }
     })
-    return Feedback;
+    return Announcement;
 }

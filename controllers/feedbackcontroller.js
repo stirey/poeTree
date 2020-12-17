@@ -8,7 +8,7 @@ const Feedback = require('../db').import('../models/feedback');
 router.post('/create', (req, res) => {
     Feedback.create({
         teacherName: req.body.feedback.teacherName,
-        feedback: req.body.feedback.comment,
+        comment: req.body.feedback.comment,
     })
     .then(
         res.send("Testing the feedback table")
