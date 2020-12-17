@@ -1,16 +1,18 @@
-let express = require('express');
-let app = express();
-let sequelize = require('./db');
-
+let express = require("express");
+const app = express();
+const sequelize = require("./db");
+let user = require('./controllers/usercontroller')
+let poetry = require('./controllers/poetrycontroller')
 // let poetry = require('./controllers/poetrycontroller')
 
-let user = require('./controllers/usercontroller')
+
+
 
 sequelize.sync();
 
 app.use(express.json());
 app.use('/user', user)
-// app.use('/poetry', poetry)
+app.use('/poetry', poetry)
 
 
 
