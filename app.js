@@ -4,6 +4,7 @@ const sequelize = require("./db");
 let user = require('./controllers/usercontroller')
 let poetry = require('./controllers/poetrycontroller')
 let emoji = require('./controllers/emojicontroller')
+let feedback = require('./controllers/feedbackcontroller');
 // let poetry = require('./controllers/poetrycontroller')
 
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use('/user', user)
 app.use('/poetry', poetry)
 app.use('/emoji', emoji)
+app.use('/feedback', feedback)
 
 
 
