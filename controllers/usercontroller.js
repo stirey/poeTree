@@ -14,10 +14,34 @@ router.post('/create', (req, res) => {
         // acorns: req.body.user.acorns,
         // admin: req.body.user.admin, 
     })
-    .then(
-        res.send("I need to get the database to work")
-    );
-})
+    // this allow me to get a json object back that the client can see and use
+    .then(user => {
+       
+        res.json({
+            user: user,
+            message: "user was created successfully"
+        })
+      }       
+    )
+    .catch(err => res.status(500).json({ error: err}))
+});
 
+/*******************
+ *****USER LOGIN****
+ *******************/
+
+ router.post('/login', (req, res) => {
+     User.findOne ({
+         where: {
+             email: req.body.user.email
+         }
+     })
+     .then(function loginSuccess(user){
+         res.status(200).json({
+             user:user
+         })
+     })
+     .catch(err => res.status(500).json({ error: err}))
+ });
 
 module.exports = router;
