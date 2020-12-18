@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../db').import('../models/user');
+const jwt = require("jsonwebtoken");
 
 /*******************
  ***USER SIGNUP*****
@@ -16,10 +17,13 @@ router.post('/create', (req, res) => {
     })
     // this allow me to get a json object back that the client can see and use
     .then(user => {
-       
+       // .sign is used to create the token & takes 2 parameters
+        let token = jwt.sign({id: user.id}, "i_am_secret", {expiresIn: '7d'})
+
         res.json({
             user: user,
-            message: "user was created successfully"
+            message: "user was created successfully",
+            sessionToken: token
         })
       }       
     )
@@ -37,9 +41,16 @@ router.post('/create', (req, res) => {
          }
      })
      .then(function loginSuccess(user){
-         res.status(200).json({
-             user:user
-         })
+         if (user) {
+             let token = jwt.sign({id: user.id}, "i_am_secret", {expiresIn: '7d'})
+             res.status(200).json({
+                 user: user,
+                 message: "user successfully logged in",
+                 sessionToken: token
+             })
+         } else {
+         res.status(500).json({error: 'User does not exist.'})
+            } 
      })
      .catch(err => res.status(500).json({ error: err}))
  });
