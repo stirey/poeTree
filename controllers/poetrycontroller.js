@@ -1,7 +1,7 @@
 
 const router = require('express').Router();
+let validateSession = require('../middleware/validate-session');
 const Poetry = require('../db').import('../models/poetry');
-
 
 /*******************
  ***POETRY CREATE***
@@ -26,18 +26,14 @@ router.post('/create', (req, res) => {
         linetwo: req.body.poetry.linetwo,
         linethree: req.body.poetry.linethree
     })
-    .then(
-        res.send("launching the poetry table")
-    );
+    .then(poetry => res.status(200).json(poetry))
+    .catch(err => res.status(500).json({ error: err }))
+})
+
+
+router.get('/gallery', validateSession, function(req, res)
+{   res.send('this is a practice route.')
+    
 })
 
 module.exports = router;
-
-
-
-// router.get('/poetry', function(req, res)
-// {
-//     res.send('this is a practice route.')
-// })
-
-// module.exports = router

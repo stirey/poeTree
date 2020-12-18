@@ -1,3 +1,4 @@
+require("dotenv").config();
 let express = require("express");
 const app = express();
 const sequelize = require("./db");
@@ -14,7 +15,15 @@ let announcement = require('./controllers/announcementcontroller.js')
 sequelize.sync();
 
 app.use(express.json());
+/*********************
+ ****EXPOSED ROUTE****
+ ********************/
 app.use('/user', user)
+
+/*********************
+ *PROTECTED ROUTES****
+ ********************/
+app.use(require('./middleware/validate-session'));
 app.use('/poetry', poetry)
 app.use('/emoji', emoji)
 app.use('/feedback', feedback)
