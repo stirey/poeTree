@@ -1,13 +1,15 @@
 
 const router = require('express').Router();
 let validateSession = require('../middleware/validate-session');
+const poetry = require('../models/poetry');
+// const poetry = require('../models/poetry');
 const Poetry = require('../db').import('../models/poetry');
 
 /*******************
  ***POETRY CREATE***
 ********************/ 
 
-router.post('/create', (req, res) => {
+router.post('/create', validateSession, (req, res) => {
     Poetry.create({
         question1: req.body.poetry.question1,
         question2: req.body.poetry.question2,
@@ -24,16 +26,76 @@ router.post('/create', (req, res) => {
         poemtitle: req.body.poetry.poemtitle,
         lineone: req.body.poetry.lineone,
         linetwo: req.body.poetry.linetwo,
-        linethree: req.body.poetry.linethree
+        linethree: req.body.poetry.linethree,
+        owner: req.user.id
     })
     .then(poetry => res.status(200).json(poetry))
     .catch(err => res.status(500).json({ error: err }))
 })
 
+/* *******************************
+*******GET ALL POETRY************
+**********************************/
+router.get('/', (req, res) => {
+    Poetry.findAll()
+    .then(poetry => res.status(200).json(poetry))
+    .catch(err => res.status(500).json({ error: err }))
+});
 
-router.get('/gallery', validateSession, function(req, res)
-{   res.send('this is a practice route.')
-    
-})
+/* ***************************
+*****GET ENTRIES BY USER****
+*************************** */
+router.get("/mine", validateSession, (req, res) => {
+    let userid = req.user.id
+    Poetry.findAll({
+        where: { owner: userid}
+    })
+    .then(poetry => res.status(200).json(poetry))
+    .catch(err => res.status(500).json({ error: err }))
+});
+
+/*********************************
+ ***UPDATE POETRY BY POEM TITLE***
+ *********************************/
+ router.put('/update/:entryId', validateSession, (req, res) => {
+     const updatePoetryEntry = {
+        question1: req.body.poetry.question1,
+        question2: req.body.poetry.question2,
+        question3: req.body.poetry.question3,
+        red: req.body.poetry.red,
+        orange: req.body.poetry.orange,
+        yellow: req.body.poetry.yellow,
+        green: req.body.poetry.green,
+        blue: req.body.poetry.blue,
+        purple: req.body.poetry.purple,
+        black: req.body.poetry.black,
+        gray: req.body.poetry.gray,
+        white: req.body.poetry.white,
+        poemtitle: req.body.poetry.poemtitle,
+        lineone: req.body.poetry.lineone,
+        linetwo: req.body.poetry.linetwo,
+        linethree: req.body.poetry.linethree,
+        owner: req.user.id
+     }
+     
+     const query = { where: { id: req.params.entryId, owner: req.user.id}};
+
+     Poetry.update(updatePoetryEntry, query)
+     .then((poetry) => res.status(200).json(poetry))
+     .catch(err => res.status(500).json({ error: err}))
+ })
+
+ /*********************************
+  ****DELETE POETRY ENTRY BY ID****
+ **********************************/
+
+router.delete('/delete/:entryId', validateSession, (req, res) => {
+ 
+    const query = { where: { id: req.params.entryId, owner: req.user.id }};
+
+    Poetry.destroy(query)
+    .then(() => res.status(200).json({ message: "Poetry entry removed"}))
+    .catch((err) => res.status(500).json({ error: err}));
+});
 
 module.exports = router;

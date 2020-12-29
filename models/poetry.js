@@ -65,6 +65,9 @@ module.exports = function (sequelize, DataTypes) {
         linethree: {
             type: DataTypes.STRING,
             allowNull: true
+        },
+        owner: {
+            type: DataTypes.INTEGER
         }
     })
     return Poetry;

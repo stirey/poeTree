@@ -14,12 +14,11 @@ router.post('/create', (req, res) => {
         acorns: req.body.user.acorns,
         admin: req.body.user.admin
         
-
     })
     // this allow me to get a json object back that the client can see and use
     .then(user => {
        // .sign is used to create the token & takes 2 parameters
-        let token = jwt.sign({id: user.id}, process.env.JWT_SECRET,  {expiresIn: '7d'})
+        let token = jwt.sign({id: user.id}, process.env.JWT_SECRET,  {expiresIn: '60d'})
 
         res.json({
             user: user,
@@ -46,7 +45,7 @@ router.post('/login', function(req, res){
         if(user){
             bcrypt.compare(req.body.user.password, user.password, function (err, matches){
                 if (matches) {
-                let token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn: '30d'}) 
+                let token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn: '60d'}) 
                 
                 res.status(200).json({ 
                 user: user,
