@@ -2,6 +2,7 @@ const router = require('express').Router();
 const User = require('../db').import('../models/user');
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcryptjs');
+const validateSession = require('../middleware/validate-session');
 
 /*******************
  ***USER SIGNUP*****
@@ -65,6 +66,23 @@ router.post('/login', function(req, res){
         .catch(err => res.status(500).json({ error: err}))
         });
         
+    /***********************
+    ****ACORN/USER UPDATE***
+    ***********************/
+
+    router.put('/update/:id', validateSession, (req, res) => {
+        const updateAcorns = {
+            email: req.body.user.email,
+            password: bcrypt.hashSync(req.body.user.password, 13),
+            acorns: req.body.user.acorns,
+            admin: req.body.user.admin   
+        }
+        const query = { where: { id: req.params.id}};
+
+        User.update(updateAcorns, query)
+        .then((acorns) => res.status(200).json(acorns))
+        .catch(err => res.status(500).json({ error: err}))
+    })
 
 
 

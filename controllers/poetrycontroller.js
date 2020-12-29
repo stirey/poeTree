@@ -32,7 +32,7 @@ router.post('/create', validateSession, (req, res) => {
     .catch(err => res.status(500).json({ error: err }))
 })
 
-/* *******************************
+/*********************************
 *******GET ALL POETRY************
 **********************************/
 router.get('/', (req, res) => {
