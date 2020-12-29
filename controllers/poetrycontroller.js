@@ -1,8 +1,7 @@
 
 const router = require('express').Router();
 let validateSession = require('../middleware/validate-session');
-const poetry = require('../models/poetry');
-// const poetry = require('../models/poetry');
+
 const Poetry = require('../db').import('../models/poetry');
 
 /*******************
@@ -42,9 +41,9 @@ router.get('/', (req, res) => {
     .catch(err => res.status(500).json({ error: err }))
 });
 
-/* ***************************
-*****GET ENTRIES BY USER****
-*************************** */
+/*****************************
+*****GET ENTRIES BY USER******
+*****************************/
 router.get("/mine", validateSession, (req, res) => {
     let userid = req.user.id
     Poetry.findAll({
@@ -55,7 +54,7 @@ router.get("/mine", validateSession, (req, res) => {
 });
 
 /*********************************
- ***UPDATE POETRY BY POEM TITLE***
+ ***UPDATE POETRY BY ENTRY ID*****
  *********************************/
  router.put('/update/:entryId', validateSession, (req, res) => {
      const updatePoetryEntry = {
