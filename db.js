@@ -11,5 +11,17 @@ sequelize.authenticate()
 .catch(err => {
     console.error('Unable to connect to the database:', err);
 });
+
+User = sequelize.import('./models/user');
+Poetry = sequelize.import('./models/poetry')
+Emoji = sequelize.import('./models/emoji')
+
+Poetry.belongsTo(User);
+User.hasMany(Poetry) 
+
+Emoji.belongsTo(Poetry);
+Poetry.hasMany(Emoji)
+
+User.hasMany(Emoji)
     
 module.exports = sequelize;

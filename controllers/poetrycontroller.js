@@ -26,7 +26,7 @@ router.post('/create', validateSession, (req, res) => {
         lineone: req.body.poetry.lineone,
         linetwo: req.body.poetry.linetwo,
         linethree: req.body.poetry.linethree,
-        owner: req.user.id
+        userId: req.user.id
     })
     .then(poetry => res.status(200).json(poetry))
     .catch(err => res.status(500).json({ error: err }))

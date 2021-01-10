@@ -9,9 +9,6 @@ let feedback = require('./controllers/feedbackcontroller')
 let announcement = require('./controllers/announcementcontroller.js')
 
 
-
-
-
 sequelize.sync();
 
 app.use(express.json());

@@ -66,7 +66,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true
         },
-        owner: {
+        userId: {
             type: DataTypes.INTEGER
         }
     })

@@ -13,6 +13,9 @@ module.exports = function (sequelize, DataTypes) {
         sun: {
             type: DataTypes.BOOLEAN,
             allowNull: true
+        },
+        userId: {
+            type: DataTypes.INTEGER
         }
        
     })
