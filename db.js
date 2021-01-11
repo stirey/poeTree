@@ -18,10 +18,10 @@ Emoji = sequelize.import('./models/emoji')
 
 Poetry.belongsTo(User);
 User.hasMany(Poetry) 
-
-Emoji.belongsTo(Poetry);
 Poetry.hasMany(Emoji)
+Emoji.belongsTo(Poetry);
 
-User.hasMany(Emoji)
+
+
     
 module.exports = sequelize;
