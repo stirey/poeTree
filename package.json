@@ -14,12 +14,17 @@
     "nodemon": "^2.0.6"
   },
   "dependencies": {
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.14.22",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.4.2",
-    "sequelize": "^5.22.3"
+    "sequelize": "^5.22.3",
+    "typescript": "^4.1.3"
   }
 }

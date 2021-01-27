@@ -38,7 +38,15 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.BOOLEAN,
             allowNull: true
         },
+        pink: {
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
         black: {
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
+        brown: {
             type: DataTypes.BOOLEAN,
             allowNull: true
         },

@@ -12,8 +12,6 @@ router.post('/create', (req, res) => {
     User.create({
         email: req.body.user.email,
         password: bcrypt.hashSync(req.body.user.password, 13),
-        acorns: req.body.user.acorns,
-        admin: req.body.user.admin
         
     })
     // this allow me to get a json object back that the client can see and use
@@ -73,9 +71,7 @@ router.post('/login', function(req, res){
     router.put('/update/:id', validateSession, (req, res) => {
         const updateAcorns = {
             email: req.body.user.email,
-            password: bcrypt.hashSync(req.body.user.password, 13),
-            acorns: req.body.user.acorns,
-            admin: req.body.user.admin   
+            password: bcrypt.hashSync(req.body.user.password, 13),   
         }
         const query = { where: { id: req.params.id}};
 
