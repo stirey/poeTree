@@ -10,7 +10,8 @@ router.post('/create', (req, res) => {
         heart: req.body.emoji.heart,
         smile: req.body.emoji.smile,
         sun: req.body.emoji.sun,
-        userId: req.user.id
+        userId: req.user.id,
+        poetryId: req.poetry.id
     })
     .then(
         res.send("Testing the emoji table")

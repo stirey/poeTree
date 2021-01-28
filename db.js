@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const sequelize = new Sequelize('poetree', 'postgres', 'password', {
+const sequelize = new Sequelize(process.env.NAME, 'postgres', process.env.PASS, {
     host: 'localhost',
     dialect: 'postgres'
 });
@@ -16,10 +16,23 @@ User = sequelize.import('./models/user');
 Poetry = sequelize.import('./models/poetry')
 Emoji = sequelize.import('./models/emoji')
 
+
 Poetry.belongsTo(User);
-User.hasMany(Poetry) 
+User.hasMany(Poetry)
+
+
 Poetry.hasMany(Emoji)
 Emoji.belongsTo(Poetry);
+
+
+
+
+
+// Poetry.hasMany(Emoji, {as: 'emoji'})
+// Emoji.belongsTo(Poetry);
+
+// User.hasMany(Emoji, {as: 'emoji'})
+// Emoji.belongsto(User);
 
 
 

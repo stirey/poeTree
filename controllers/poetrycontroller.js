@@ -46,10 +46,10 @@ router.get('/', (req, res) => {
 /*****************************
 *****GET ENTRIES BY USER******
 *****************************/
-router.get("/mine", validateSession, (req, res) => {
-    let userid = req.user.id
+router.get("/mine/:userId", validateSession, (req, res) => {
+    // let userId = req.user.id
     Poetry.findAll({
-        where: { owner: userid}
+        where: { userId: req.user.id}
     })
     .then(poetry => res.status(200).json(poetry))
     .catch(err => res.status(500).json({ error: err }))
@@ -78,7 +78,7 @@ router.get("/mine", validateSession, (req, res) => {
         lineone: req.body.poetry.lineone,
         linetwo: req.body.poetry.linetwo,
         linethree: req.body.poetry.linethree,
-        owner: req.user.id
+        userId: req.user.id
      }
      
      const query = { where: { id: req.params.entryId, owner: req.user.id}};
@@ -94,7 +94,7 @@ router.get("/mine", validateSession, (req, res) => {
 
 router.delete('/delete/:entryId', validateSession, (req, res) => {
  
-    const query = { where: { id: req.params.entryId, owner: req.user.id }};
+    const query = { where: { id: req.params.entryId, userId: req.user.id }};
 
     Poetry.destroy(query)
     .then(() => res.status(200).json({ message: "Poetry entry removed"}))

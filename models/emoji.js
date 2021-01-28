@@ -15,6 +15,9 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: true
         },
         userId: {
+            type: DataTypes.INTEGER,
+        },
+        poetryId: {
             type: DataTypes.INTEGER
         }
        
