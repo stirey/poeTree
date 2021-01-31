@@ -4,23 +4,7 @@ module.exports = function (sequelize, DataTypes) {
 
         heart: {
             type: DataTypes.BOOLEAN,
-            allowNull: true
-        },
-        smile: {
-            type: DataTypes.BOOLEAN,
-            allowNull: true
-        },
-        sun: {
-            type: DataTypes.BOOLEAN,
-            allowNull: true
-        },
-        userId: {
-            type: DataTypes.INTEGER,
-        },
-        poetryId: {
-            type: DataTypes.INTEGER
-        }
-       
+        } 
     })
     return Emoji;
 }

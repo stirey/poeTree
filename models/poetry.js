@@ -75,8 +75,17 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: true
         },
         userId: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+        },
+
+        //this value will increase with every click of the emoji button
+        like: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
         }
     })
     return Poetry;
 }
+
+
+   

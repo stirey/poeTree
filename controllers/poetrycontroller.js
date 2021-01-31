@@ -58,6 +58,7 @@ router.get("/mine/:userId", validateSession, (req, res) => {
 /*********************************
  ***UPDATE POETRY BY ENTRY ID*****
  *********************************/
+// this is working
  router.put('/update/:entryId', validateSession, (req, res) => {
      const updatePoetryEntry = {
         question1: req.body.poetry.question1,
@@ -81,7 +82,7 @@ router.get("/mine/:userId", validateSession, (req, res) => {
         userId: req.user.id
      }
      
-     const query = { where: { id: req.params.entryId, owner: req.user.id}};
+     const query = { where: { id: req.params.entryId, userId: req.user.id }};
 
      Poetry.update(updatePoetryEntry, query)
      .then((poetry) => res.status(200).json(poetry))
@@ -91,7 +92,7 @@ router.get("/mine/:userId", validateSession, (req, res) => {
  /*********************************
   ****DELETE POETRY ENTRY BY ID****
  **********************************/
-
+// this is working
 router.delete('/delete/:entryId', validateSession, (req, res) => {
  
     const query = { where: { id: req.params.entryId, userId: req.user.id }};
