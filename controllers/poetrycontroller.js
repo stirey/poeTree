@@ -39,6 +39,7 @@ router.post('/create', validateSession, (req, res) => {
 **********************************/
 router.get('/', (req, res) => {
     Poetry.findAll()
+    //look up orderquery on sequelize...findall look at docs.
     .then(poetry => res.status(200).json(poetry))
     .catch(err => res.status(500).json({ error: err }))
 });

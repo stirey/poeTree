@@ -20,6 +20,7 @@ app.use(require('./middleware/headers'));
 /*********************
  ****EXPOSED ROUTE****
  ********************/
+
 app.use('/user', user)
 
 /*********************
