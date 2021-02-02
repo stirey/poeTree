@@ -28,6 +28,8 @@ Emoji.belongsTo(User)
 
 
 
+
+
 // Poetry.hasMany(Emoji, {as: 'emoji'})
 // Emoji.belongsTo(Poetry);
 

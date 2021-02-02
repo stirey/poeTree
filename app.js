@@ -10,6 +10,7 @@ let emoji = require('./controllers/emojicontroller')
 let feedback = require('./controllers/feedbackcontroller')
 let announcement = require('./controllers/announcementcontroller.js')
 
+
 const sequelize = require("./db");
 // force: true- everytime i save and the server restarts, it will get rid of the database and make a new one. 
 sequelize.sync();
@@ -29,6 +30,7 @@ app.use('/user', user)
 
 app.use('/poetry', poetry)
 app.use('/emoji', emoji)
+
 app.use('/feedback', feedback)
 app.use('/announcement', announcement)
 

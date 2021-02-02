@@ -68,17 +68,17 @@ router.post('/login', function(req, res){
     ****ACORN/USER UPDATE***
     ***********************/
 
-    router.put('/update/:id', validateSession, (req, res) => {
-        const updateAcorns = {
-            email: req.body.user.email,
-            password: bcrypt.hashSync(req.body.user.password, 13),   
-        }
-        const query = { where: { id: req.params.id}};
+    // router.put('/update/:id', validateSession, (req, res) => {
+    //     const updateAcorns = {
+    //         email: req.body.user.email,
+    //         password: bcrypt.hashSync(req.body.user.password, 13),   
+    //     }
+    //     const query = { where: { id: req.params.id}};
 
-        User.update(updateAcorns, query)
-        .then((acorns) => res.status(200).json(acorns))
-        .catch(err => res.status(500).json({ error: err}))
-    })
+    //     User.update(updateAcorns, query)
+    //     .then((acorns) => res.status(200).json(acorns))
+    //     .catch(err => res.status(500).json({ error: err}))
+    // })
 
 
 
