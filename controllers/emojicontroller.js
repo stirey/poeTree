@@ -1,7 +1,7 @@
 const validateSession = require('../middleware/validate-session');
 
 const router = require('express').Router();
-
+const Emoji = require('../db').import('../models/emoji');
 const Poetry = require('../db').import('../models/poetry');
 
 /*******************
