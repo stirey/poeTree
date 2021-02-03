@@ -35,5 +35,6 @@ app.use('/feedback', feedback)
 app.use('/announcement', announcement)
 
 
-
+// If you're using express to listen on a port it will be app.listen
+// If you're uisng node http to listen on a port it will be http.listen
 app.listen(process.env.PORT, () => console.log(`App is listening on ${process.env.PORT}`));
