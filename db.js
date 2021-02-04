@@ -1,9 +1,23 @@
 const Sequelize = require("sequelize");
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-    dialect: 'postgres'
+// const database = new Sequelize(process.env.DATABASE_URL, {
+//     dialect: 'postgres'
+// });
+
+// this is checking the heroku app for local host 
+const database = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    dialectOptions: process.env.DATABASE_URL.includes('localhost') ?  {
+        
+    }: 
+    {
+        ssl: {
+            require: true,
+            rejectUnauthorized: false, 
+          },
+    }
 });
 
-sequelize.authenticate()
+database.authenticate()
 .then(() => {
     console.log('Connected to poetree postgres database');
 })
@@ -11,9 +25,9 @@ sequelize.authenticate()
     console.error('Unable to connect to the database:', err);
 });
 
-User = sequelize.import('./models/user');
-Poetry = sequelize.import('./models/poetry')
-Emoji = sequelize.import('./models/emoji')
+User = database.import('./models/user');
+Poetry = database.import('./models/poetry')
+Emoji = database.import('./models/emoji')
 
 
 Poetry.belongsTo(User);
