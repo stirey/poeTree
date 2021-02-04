@@ -40,7 +40,7 @@ User.hasMany(Emoji)
 Emoji.belongsTo(User)
 
 
-
+module.exports = database;
 
 
 // Poetry.hasMany(Emoji, {as: 'emoji'})
@@ -52,4 +52,3 @@ Emoji.belongsTo(User)
 
 
     
-module.exports = sequelize;
